@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ThreeStarsandaSun.Areas.Identity.Data;
 
@@ -11,9 +12,10 @@ using ThreeStarsandaSun.Areas.Identity.Data;
 namespace ThreeStarsandaSun.Migrations
 {
     [DbContext(typeof(ThreeStarsandaSunContextDb))]
-    partial class ThreeStarsandaSunContextDbModelSnapshot : ModelSnapshot
+    [Migration("20220706222514_RestaurantTableAdded")]
+    partial class RestaurantTableAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -252,10 +254,6 @@ namespace ThreeStarsandaSun.Migrations
                     b.Property<int>("CityID")
                         .HasColumnType("int");
 
-                    b.Property<string>("CityName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("RestaurantAddress")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -328,12 +326,17 @@ namespace ThreeStarsandaSun.Migrations
             modelBuilder.Entity("ThreeStarsandaSun.Models.Restaurant", b =>
                 {
                     b.HasOne("ThreeStarsandaSun.Models.City", "City")
-                        .WithMany()
+                        .WithMany("Restaurants")
                         .HasForeignKey("CityID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("City");
+                });
+
+            modelBuilder.Entity("ThreeStarsandaSun.Models.City", b =>
+                {
+                    b.Navigation("Restaurants");
                 });
 #pragma warning restore 612, 618
         }

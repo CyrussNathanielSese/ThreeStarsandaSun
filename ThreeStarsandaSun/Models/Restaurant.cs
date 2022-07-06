@@ -18,7 +18,10 @@ namespace ThreeStarsandaSun.Models
         public int RestaurantNum { get; set; }
 
         [Required]
+        public string CityName { get; set; }
         public City City { get; set; }
+
+
 
     }
 }

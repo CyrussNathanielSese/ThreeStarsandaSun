@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ThreeStarsandaSun.Areas.Identity.Data;
 
@@ -11,9 +12,10 @@ using ThreeStarsandaSun.Areas.Identity.Data;
 namespace ThreeStarsandaSun.Migrations
 {
     [DbContext(typeof(ThreeStarsandaSunContextDb))]
-    partial class ThreeStarsandaSunContextDbModelSnapshot : ModelSnapshot
+    [Migration("20220706223944_CityANDRestaurantTableFixed2")]
+    partial class CityANDRestaurantTableFixed2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
