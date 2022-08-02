@@ -17,7 +17,7 @@ namespace ThreeStarsandaSun.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.6")
+                .HasAnnotation("ProductVersion", "6.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -328,12 +328,17 @@ namespace ThreeStarsandaSun.Migrations
             modelBuilder.Entity("ThreeStarsandaSun.Models.Restaurant", b =>
                 {
                     b.HasOne("ThreeStarsandaSun.Models.City", "City")
-                        .WithMany()
+                        .WithMany("Restaurants")
                         .HasForeignKey("CityID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("City");
+                });
+
+            modelBuilder.Entity("ThreeStarsandaSun.Models.City", b =>
+                {
+                    b.Navigation("Restaurants");
                 });
 #pragma warning restore 612, 618
         }

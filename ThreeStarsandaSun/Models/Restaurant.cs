@@ -1,4 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace ThreeStarsandaSun.Models
 {
@@ -18,7 +22,7 @@ namespace ThreeStarsandaSun.Models
         public int RestaurantNum { get; set; }
 
         [Required]
-        public string CityName { get; set; }
+        public City CityName { get; set; }
         public City City { get; set; }
 
 

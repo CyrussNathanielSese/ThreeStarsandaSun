@@ -9,8 +9,8 @@ namespace ThreeStarsandaSun.Models
         [Display(Name = "City")]
         public string CityName { get; set; }
 
-        
-        //public ICollection<Store> Stores { get; set; }
+
+        public ICollection<Restaurant> Restaurants { get; set; }
         //public ICollection<Event> Events { get; set; }
     }
 }
