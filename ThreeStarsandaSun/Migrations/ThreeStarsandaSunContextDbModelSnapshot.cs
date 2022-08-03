@@ -249,13 +249,6 @@ namespace ThreeStarsandaSun.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RestaurantID"), 1L, 1);
 
-                    b.Property<int>("CityID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CityName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("RestaurantAddress")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -268,8 +261,6 @@ namespace ThreeStarsandaSun.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("RestaurantID");
-
-                    b.HasIndex("CityID");
 
                     b.ToTable("Restaurant");
                 });
@@ -323,22 +314,6 @@ namespace ThreeStarsandaSun.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("ThreeStarsandaSun.Models.Restaurant", b =>
-                {
-                    b.HasOne("ThreeStarsandaSun.Models.City", "City")
-                        .WithMany("Restaurants")
-                        .HasForeignKey("CityID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("City");
-                });
-
-            modelBuilder.Entity("ThreeStarsandaSun.Models.City", b =>
-                {
-                    b.Navigation("Restaurants");
                 });
 #pragma warning restore 612, 618
         }

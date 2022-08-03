@@ -21,8 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Cities\" />
-    <Folder Include="Views\Restaurants\" />
+    <Folder Include="Views\Restaurant\" />
   </ItemGroup>
 
 </Project>

@@ -7,10 +7,11 @@ namespace ThreeStarsandaSun.Models
         public int CityID { get; set; }
         
         [Display(Name = "City")]
+        [Required]
         public string CityName { get; set; }
 
 
-        public ICollection<Restaurant> Restaurants { get; set; }
+        //public ICollection<Restaurant> Restaurants { get; set; }
         //public ICollection<Event> Events { get; set; }
     }
 }

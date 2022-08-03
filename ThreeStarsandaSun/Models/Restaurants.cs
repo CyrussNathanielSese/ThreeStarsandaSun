@@ -21,9 +21,9 @@ namespace ThreeStarsandaSun.Models
         [Display(Name =" Number")]
         public int RestaurantNum { get; set; }
 
-        [Required]
-        public City CityName { get; set; }
-        public City City { get; set; }
+        //[Required]
+        //public City CityName { get; set; }
+        //public City City { get; set; }
 
 
 
