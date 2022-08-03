@@ -1,7 +1,12 @@
-﻿namespace ThreeStarsandaSun.Models
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+
+namespace ThreeStarsandaSun.Models
 {
     public class City
     {
-        publi
+        public int CityID { get; set; }
+        [Display(Name = "City")]
+        public string CityName { get; set; }
     }
 }

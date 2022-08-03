@@ -12,8 +12,8 @@ using ThreeStarsandaSun.Areas.Identity.Data;
 namespace ThreeStarsandaSun.Migrations
 {
     [DbContext(typeof(ThreeStarsandaSunContextDb))]
-    [Migration("20220803222437_fl")]
-    partial class fl
+    [Migration("20220803223532_CityTablePleaseWork")]
+    partial class CityTableAdded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
