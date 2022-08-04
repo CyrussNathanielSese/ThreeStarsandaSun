@@ -12,7 +12,7 @@ using ThreeStarsandaSun.Areas.Identity.Data;
 namespace ThreeStarsandaSun.Migrations
 {
     [DbContext(typeof(ThreeStarsandaSunContextDb))]
-    [Migration("20220804214533_RestoTableAdded")]
+    [Migration("20220804214843_RestoTableAdded")]
     partial class RestoTableAdded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
