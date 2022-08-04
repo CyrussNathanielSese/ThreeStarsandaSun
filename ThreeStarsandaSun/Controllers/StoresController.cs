@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ThreeStarsandaSun.Areas.Identity.Data;
 using ThreeStarsandaSun.Models;
 
-namespace ThreeStarsandaSun.Views.Stores
+namespace ThreeStarsandaSun.Controllers
 {
     public class StoresController : Controller
     {
@@ -22,9 +22,9 @@ namespace ThreeStarsandaSun.Views.Stores
         // GET: Stores
         public async Task<IActionResult> Index()
         {
-              return _context.Store != null ? 
-                          View(await _context.Store.ToListAsync()) :
-                          Problem("Entity set 'ThreeStarsandaSunContextDb.Store'  is null.");
+            return _context.Store != null ?
+                        View(await _context.Store.ToListAsync()) :
+                        Problem("Entity set 'ThreeStarsandaSunContextDb.Store'  is null.");
         }
 
         // GET: Stores/Details/5
@@ -150,14 +150,14 @@ namespace ThreeStarsandaSun.Views.Stores
             {
                 _context.Store.Remove(store);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool StoreExists(int id)
         {
-          return (_context.Store?.Any(e => e.StoreID == id)).GetValueOrDefault();
+            return (_context.Store?.Any(e => e.StoreID == id)).GetValueOrDefault();
         }
     }
 }

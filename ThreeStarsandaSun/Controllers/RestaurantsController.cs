@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ThreeStarsandaSun.Areas.Identity.Data;
 using ThreeStarsandaSun.Models;
 
-namespace ThreeStarsandaSun.Views.Restaurants
+namespace ThreeStarsandaSun.Controllers
 {
     public class RestaurantsController : Controller
     {
@@ -22,9 +22,9 @@ namespace ThreeStarsandaSun.Views.Restaurants
         // GET: Restaurants
         public async Task<IActionResult> Index()
         {
-              return _context.Restaurant != null ? 
-                          View(await _context.Restaurant.ToListAsync()) :
-                          Problem("Entity set 'ThreeStarsandaSunContextDb.Restaurant'  is null.");
+            return _context.Restaurant != null ?
+                        View(await _context.Restaurant.ToListAsync()) :
+                        Problem("Entity set 'ThreeStarsandaSunContextDb.Restaurant'  is null.");
         }
 
         // GET: Restaurants/Details/5
@@ -150,14 +150,14 @@ namespace ThreeStarsandaSun.Views.Restaurants
             {
                 _context.Restaurant.Remove(restaurant);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool RestaurantExists(int id)
         {
-          return (_context.Restaurant?.Any(e => e.RestaurantID == id)).GetValueOrDefault();
+            return (_context.Restaurant?.Any(e => e.RestaurantID == id)).GetValueOrDefault();
         }
     }
 }

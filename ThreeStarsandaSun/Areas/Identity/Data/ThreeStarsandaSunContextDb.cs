@@ -28,5 +28,7 @@ public class ThreeStarsandaSunContextDb : IdentityDbContext<ThreeStarsandaSunUse
 
     public DbSet<ThreeStarsandaSun.Models.Store>? Store { get; set; }
 
+    public DbSet<ThreeStarsandaSun.Models.Event>? Event { get; set; }
+
 
 }
