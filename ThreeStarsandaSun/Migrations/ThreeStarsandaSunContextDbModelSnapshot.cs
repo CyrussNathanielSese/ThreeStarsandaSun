@@ -249,16 +249,16 @@ namespace ThreeStarsandaSun.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RestaurantID"), 1L, 1);
 
-                    b.Property<string>("RestaurantAddress")
+                    b.Property<string>("RestoAddress")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RestaurantName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("RestaurantNum")
+                    b.Property<int>("RestoContactNumber")
                         .HasColumnType("int");
+
+                    b.Property<string>("RestoName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("RestaurantID");
 

@@ -26,4 +26,5 @@ public class ThreeStarsandaSunContextDb : IdentityDbContext<ThreeStarsandaSunUse
 
     public DbSet<ThreeStarsandaSun.Models.Restaurant>? Restaurant { get; set; }
 
+
 }

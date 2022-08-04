@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ThreeStarsandaSun.Areas.Identity.Data;
 using ThreeStarsandaSun.Models;
 
-namespace ThreeStarsandaSun.Controllers
+namespace ThreeStarsandaSun.Views.Restaurants
 {
     public class RestaurantsController : Controller
     {
@@ -22,9 +22,9 @@ namespace ThreeStarsandaSun.Controllers
         // GET: Restaurants
         public async Task<IActionResult> Index()
         {
-            return _context.Restaurant != null ?
-                        View(await _context.Restaurant.ToListAsync()) :
-                        Problem("Entity set 'ThreeStarsandaSunContextDb.Restaurant'  is null.");
+              return _context.Restaurant != null ? 
+                          View(await _context.Restaurant.ToListAsync()) :
+                          Problem("Entity set 'ThreeStarsandaSunContextDb.Restaurant'  is null.");
         }
 
         // GET: Restaurants/Details/5
@@ -56,7 +56,7 @@ namespace ThreeStarsandaSun.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("RestaurantID,RestaurantName,RestaurantAddress,RestaurantNum")] Restaurant restaurant)
+        public async Task<IActionResult> Create([Bind("RestaurantID,RestoName,RestoAddress,RestoContactNumber")] Restaurant restaurant)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +88,7 @@ namespace ThreeStarsandaSun.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("RestaurantID,RestaurantName,RestaurantAddress,RestaurantNum")] Restaurant restaurant)
+        public async Task<IActionResult> Edit(int id, [Bind("RestaurantID,RestoName,RestoAddress,RestoContactNumber")] Restaurant restaurant)
         {
             if (id != restaurant.RestaurantID)
             {
@@ -150,14 +150,14 @@ namespace ThreeStarsandaSun.Controllers
             {
                 _context.Restaurant.Remove(restaurant);
             }
-
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool RestaurantExists(int id)
         {
-            return (_context.Restaurant?.Any(e => e.RestaurantID == id)).GetValueOrDefault();
+          return (_context.Restaurant?.Any(e => e.RestaurantID == id)).GetValueOrDefault();
         }
     }
 }
