@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ThreeStarsandaSun.Areas.Identity.Data;
 using ThreeStarsandaSun.Models;
 
-namespace ThreeStarsandaSun.Views.Events
+namespace ThreeStarsandaSun.Controllers
 {
     public class EventsController : Controller
     {
@@ -22,9 +22,9 @@ namespace ThreeStarsandaSun.Views.Events
         // GET: Events
         public async Task<IActionResult> Index()
         {
-              return _context.Event != null ? 
-                          View(await _context.Event.ToListAsync()) :
-                          Problem("Entity set 'ThreeStarsandaSunContextDb.Event'  is null.");
+            return _context.Event != null ?
+                        View(await _context.Event.ToListAsync()) :
+                        Problem("Entity set 'ThreeStarsandaSunContextDb.Event'  is null.");
         }
 
         // GET: Events/Details/5
@@ -150,14 +150,14 @@ namespace ThreeStarsandaSun.Views.Events
             {
                 _context.Event.Remove(@event);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool EventExists(int id)
         {
-          return (_context.Event?.Any(e => e.EventID == id)).GetValueOrDefault();
+            return (_context.Event?.Any(e => e.EventID == id)).GetValueOrDefault();
         }
     }
 }
