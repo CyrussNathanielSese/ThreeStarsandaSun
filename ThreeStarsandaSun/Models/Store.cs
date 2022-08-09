@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace ThreeStarsandaSun.Models
 {
@@ -13,6 +14,9 @@ namespace ThreeStarsandaSun.Models
         public string StoreAddress { get; set; }
         [Display(Name = "Contact Number")]
         public int StoreContactNumber { get; set; }
+        [Required]
+        public string CityName { get; set; }
+        public City City { get; set; }
 
     }
 }

@@ -24,7 +24,12 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration" Version="6.0.7" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Contracts" Version="5.0.2" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.7" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Events\" />
+    <Folder Include="Views\Stores\" />
   </ItemGroup>
 
 </Project>

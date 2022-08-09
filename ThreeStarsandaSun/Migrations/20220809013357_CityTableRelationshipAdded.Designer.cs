@@ -12,8 +12,8 @@ using ThreeStarsandaSun.Areas.Identity.Data;
 namespace ThreeStarsandaSun.Migrations
 {
     [DbContext(typeof(ThreeStarsandaSunContextDb))]
-    [Migration("20220804214843_RestoTableAdded")]
-    partial class RestoTableAdded
+    [Migration("20220809013357_CityTableRelationshipAdded")]
+    partial class CityTableRelationshipAdded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -243,6 +243,39 @@ namespace ThreeStarsandaSun.Migrations
                     b.ToTable("City");
                 });
 
+            modelBuilder.Entity("ThreeStarsandaSun.Models.Event", b =>
+                {
+                    b.Property<int>("EventID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EventID"), 1L, 1);
+
+                    b.Property<int>("CityID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CityName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EventAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("EventDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("EventName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("EventID");
+
+                    b.HasIndex("CityID");
+
+                    b.ToTable("Event");
+                });
+
             modelBuilder.Entity("ThreeStarsandaSun.Models.Restaurant", b =>
                 {
                     b.Property<int>("RestaurantID")
@@ -250,6 +283,13 @@ namespace ThreeStarsandaSun.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RestaurantID"), 1L, 1);
+
+                    b.Property<int>("CityID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CityName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RestoAddress")
                         .IsRequired()
@@ -264,7 +304,42 @@ namespace ThreeStarsandaSun.Migrations
 
                     b.HasKey("RestaurantID");
 
+                    b.HasIndex("CityID");
+
                     b.ToTable("Restaurant");
+                });
+
+            modelBuilder.Entity("ThreeStarsandaSun.Models.Store", b =>
+                {
+                    b.Property<int>("StoreID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StoreID"), 1L, 1);
+
+                    b.Property<int>("CityID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CityName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StoreAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StoreContactNumber")
+                        .HasColumnType("int");
+
+                    b.Property<string>("StoreName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("StoreID");
+
+                    b.HasIndex("CityID");
+
+                    b.ToTable("Store");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -316,6 +391,48 @@ namespace ThreeStarsandaSun.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("ThreeStarsandaSun.Models.Event", b =>
+                {
+                    b.HasOne("ThreeStarsandaSun.Models.City", "City")
+                        .WithMany("Event")
+                        .HasForeignKey("CityID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("City");
+                });
+
+            modelBuilder.Entity("ThreeStarsandaSun.Models.Restaurant", b =>
+                {
+                    b.HasOne("ThreeStarsandaSun.Models.City", "City")
+                        .WithMany("Restaurant")
+                        .HasForeignKey("CityID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("City");
+                });
+
+            modelBuilder.Entity("ThreeStarsandaSun.Models.Store", b =>
+                {
+                    b.HasOne("ThreeStarsandaSun.Models.City", "City")
+                        .WithMany("Store")
+                        .HasForeignKey("CityID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("City");
+                });
+
+            modelBuilder.Entity("ThreeStarsandaSun.Models.City", b =>
+                {
+                    b.Navigation("Event");
+
+                    b.Navigation("Restaurant");
+
+                    b.Navigation("Store");
                 });
 #pragma warning restore 612, 618
         }

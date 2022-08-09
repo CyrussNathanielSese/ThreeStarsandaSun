@@ -17,6 +17,10 @@ namespace ThreeStarsandaSun.Models
         [Display(Name ="Contact Number")]
         public int RestoContactNumber { get; set; }
 
+        [Required]
+        public string CityName { get; set; }
+        public City City { get; set; }
+
         
 
 

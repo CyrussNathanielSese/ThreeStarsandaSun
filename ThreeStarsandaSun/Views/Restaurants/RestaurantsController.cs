@@ -8,89 +8,89 @@ using Microsoft.EntityFrameworkCore;
 using ThreeStarsandaSun.Areas.Identity.Data;
 using ThreeStarsandaSun.Models;
 
-namespace ThreeStarsandaSun.Controllers
+namespace ThreeStarsandaSun.Views.Restaurants
 {
-    public class StoresController : Controller
+    public class RestaurantsController : Controller
     {
         private readonly ThreeStarsandaSunContextDb _context;
 
-        public StoresController(ThreeStarsandaSunContextDb context)
+        public RestaurantsController(ThreeStarsandaSunContextDb context)
         {
             _context = context;
         }
 
-        // GET: Stores
+        // GET: Restaurants
         public async Task<IActionResult> Index()
         {
-            return _context.Store != null ?
-                        View(await _context.Store.ToListAsync()) :
-                        Problem("Entity set 'ThreeStarsandaSunContextDb.Store'  is null.");
+              return _context.Restaurant != null ? 
+                          View(await _context.Restaurant.ToListAsync()) :
+                          Problem("Entity set 'ThreeStarsandaSunContextDb.Restaurant'  is null.");
         }
 
-        // GET: Stores/Details/5
+        // GET: Restaurants/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Store == null)
+            if (id == null || _context.Restaurant == null)
             {
                 return NotFound();
             }
 
-            var store = await _context.Store
-                .FirstOrDefaultAsync(m => m.StoreID == id);
-            if (store == null)
+            var restaurant = await _context.Restaurant
+                .FirstOrDefaultAsync(m => m.RestaurantID == id);
+            if (restaurant == null)
             {
                 return NotFound();
             }
 
-            return View(store);
+            return View(restaurant);
         }
 
-        // GET: Stores/Create
+        // GET: Restaurants/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Stores/Create
+        // POST: Restaurants/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("StoreID,StoreName,StoreAddress,StoreContactNumber")] Store store)
+        public async Task<IActionResult> Create([Bind("RestaurantID,RestoName,RestoAddress,RestoContactNumber,CityName")] Restaurant restaurant)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                _context.Add(store);
+                _context.Add(restaurant);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(store);
+            return View(restaurant);
         }
 
-        // GET: Stores/Edit/5
+        // GET: Restaurants/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Store == null)
+            if (id == null || _context.Restaurant == null)
             {
                 return NotFound();
             }
 
-            var store = await _context.Store.FindAsync(id);
-            if (store == null)
+            var restaurant = await _context.Restaurant.FindAsync(id);
+            if (restaurant == null)
             {
                 return NotFound();
             }
-            return View(store);
+            return View(restaurant);
         }
 
-        // POST: Stores/Edit/5
+        // POST: Restaurants/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("StoreID,StoreName,StoreAddress,StoreContactNumber")] Store store)
+        public async Task<IActionResult> Edit(int id, [Bind("RestaurantID,RestoName,RestoAddress,RestoContactNumber,CityName")] Restaurant restaurant)
         {
-            if (id != store.StoreID)
+            if (id != restaurant.RestaurantID)
             {
                 return NotFound();
             }
@@ -99,12 +99,12 @@ namespace ThreeStarsandaSun.Controllers
             {
                 try
                 {
-                    _context.Update(store);
+                    _context.Update(restaurant);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!StoreExists(store.StoreID))
+                    if (!RestaurantExists(restaurant.RestaurantID))
                     {
                         return NotFound();
                     }
@@ -115,49 +115,49 @@ namespace ThreeStarsandaSun.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(store);
+            return View(restaurant);
         }
 
-        // GET: Stores/Delete/5
+        // GET: Restaurants/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Store == null)
+            if (id == null || _context.Restaurant == null)
             {
                 return NotFound();
             }
 
-            var store = await _context.Store
-                .FirstOrDefaultAsync(m => m.StoreID == id);
-            if (store == null)
+            var restaurant = await _context.Restaurant
+                .FirstOrDefaultAsync(m => m.RestaurantID == id);
+            if (restaurant == null)
             {
                 return NotFound();
             }
 
-            return View(store);
+            return View(restaurant);
         }
 
-        // POST: Stores/Delete/5
+        // POST: Restaurants/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Store == null)
+            if (_context.Restaurant == null)
             {
-                return Problem("Entity set 'ThreeStarsandaSunContextDb.Store'  is null.");
+                return Problem("Entity set 'ThreeStarsandaSunContextDb.Restaurant'  is null.");
             }
-            var store = await _context.Store.FindAsync(id);
-            if (store != null)
+            var restaurant = await _context.Restaurant.FindAsync(id);
+            if (restaurant != null)
             {
-                _context.Store.Remove(store);
+                _context.Restaurant.Remove(restaurant);
             }
-
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool StoreExists(int id)
+        private bool RestaurantExists(int id)
         {
-            return (_context.Store?.Any(e => e.StoreID == id)).GetValueOrDefault();
+          return (_context.Restaurant?.Any(e => e.RestaurantID == id)).GetValueOrDefault();
         }
     }
 }

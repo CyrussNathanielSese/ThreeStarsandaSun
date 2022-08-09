@@ -249,6 +249,13 @@ namespace ThreeStarsandaSun.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EventID"), 1L, 1);
 
+                    b.Property<int>("CityID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CityName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("EventAddress")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -262,6 +269,8 @@ namespace ThreeStarsandaSun.Migrations
 
                     b.HasKey("EventID");
 
+                    b.HasIndex("CityID");
+
                     b.ToTable("Event");
                 });
 
@@ -272,6 +281,13 @@ namespace ThreeStarsandaSun.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RestaurantID"), 1L, 1);
+
+                    b.Property<int>("CityID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CityName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RestoAddress")
                         .IsRequired()
@@ -286,6 +302,8 @@ namespace ThreeStarsandaSun.Migrations
 
                     b.HasKey("RestaurantID");
 
+                    b.HasIndex("CityID");
+
                     b.ToTable("Restaurant");
                 });
 
@@ -296,6 +314,13 @@ namespace ThreeStarsandaSun.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StoreID"), 1L, 1);
+
+                    b.Property<int>("CityID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CityName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("StoreAddress")
                         .IsRequired()
@@ -309,6 +334,8 @@ namespace ThreeStarsandaSun.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("StoreID");
+
+                    b.HasIndex("CityID");
 
                     b.ToTable("Store");
                 });
@@ -362,6 +389,48 @@ namespace ThreeStarsandaSun.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("ThreeStarsandaSun.Models.Event", b =>
+                {
+                    b.HasOne("ThreeStarsandaSun.Models.City", "City")
+                        .WithMany("Event")
+                        .HasForeignKey("CityID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("City");
+                });
+
+            modelBuilder.Entity("ThreeStarsandaSun.Models.Restaurant", b =>
+                {
+                    b.HasOne("ThreeStarsandaSun.Models.City", "City")
+                        .WithMany("Restaurant")
+                        .HasForeignKey("CityID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("City");
+                });
+
+            modelBuilder.Entity("ThreeStarsandaSun.Models.Store", b =>
+                {
+                    b.HasOne("ThreeStarsandaSun.Models.City", "City")
+                        .WithMany("Store")
+                        .HasForeignKey("CityID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("City");
+                });
+
+            modelBuilder.Entity("ThreeStarsandaSun.Models.City", b =>
+                {
+                    b.Navigation("Event");
+
+                    b.Navigation("Restaurant");
+
+                    b.Navigation("Store");
                 });
 #pragma warning restore 612, 618
         }

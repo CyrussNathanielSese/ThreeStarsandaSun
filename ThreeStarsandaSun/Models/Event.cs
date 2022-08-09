@@ -15,5 +15,8 @@ namespace ThreeStarsandaSun.Models
         [Display(Name = "Date and Time")]
         [Required]
         public DateTime EventDateTime { get; set; }
+        public string CityName { get; set; }
+        public  City City { get; set; }
+
     }
 }
