@@ -4,7 +4,7 @@
 
 namespace ThreeStarsandaSun.Migrations
 {
-    public partial class CityTableAdded : Migration
+    public partial class CityTableCreated : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

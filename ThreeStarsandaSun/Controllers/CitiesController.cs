@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ThreeStarsandaSun.Areas.Identity.Data;
 using ThreeStarsandaSun.Models;
 
-namespace ThreeStarsandaSun.Controllers
+namespace ThreeStarsandaSun.Views.Cities
 {
     public class CitiesController : Controller
     {
@@ -22,9 +22,9 @@ namespace ThreeStarsandaSun.Controllers
         // GET: Cities
         public async Task<IActionResult> Index()
         {
-            return _context.City != null ?
-                        View(await _context.City.ToListAsync()) :
-                        Problem("Entity set 'ThreeStarsandaSunContextDb.City'  is null.");
+              return _context.City != null ? 
+                          View(await _context.City.ToListAsync()) :
+                          Problem("Entity set 'ThreeStarsandaSunContextDb.City'  is null.");
         }
 
         // GET: Cities/Details/5
@@ -58,7 +58,7 @@ namespace ThreeStarsandaSun.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("CityID,CityName")] City city)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 _context.Add(city);
                 await _context.SaveChangesAsync();
@@ -150,14 +150,14 @@ namespace ThreeStarsandaSun.Controllers
             {
                 _context.City.Remove(city);
             }
-
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool CityExists(int id)
         {
-            return (_context.City?.Any(e => e.CityID == id)).GetValueOrDefault();
+          return (_context.City?.Any(e => e.CityID == id)).GetValueOrDefault();
         }
     }
 }

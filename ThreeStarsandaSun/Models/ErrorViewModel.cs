@@ -1,4 +1,4 @@
-﻿namespace ThreeStarsandaSun.Models
+namespace ThreeStarsandaSun.Models
 {
     public class ErrorViewModel
     {

@@ -8,20 +8,18 @@ namespace ThreeStarsandaSun.Models
 
         [Display(Name = "Name")]
         [Required]
-        public string RestoName { get; set; }
+        public string RestaurantName { get; set; }
 
         [Display(Name = "Address")]
         [Required]
-        public string RestoAddress { get; set; }
+        public string RestaurantAddress { get; set; }
 
-        [Display(Name ="Contact Number")]
-        public int RestoContactNumber { get; set; }
+        [Display(Name = "Number")]
+        public int RestaurantNum { get; set; }
 
         [Required]
         public string CityName { get; set; }
         public City City { get; set; }
-
-        
 
 
 
