@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Restaurants\**" />
+    <Content Remove="Views\Restaurants\**" />
+    <EmbeddedResource Remove="Views\Restaurants\**" />
+    <None Remove="Views\Restaurants\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.6" />
@@ -21,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Restaurants\" />
+    <Folder Include="Views\Cities\" />
   </ItemGroup>
 
 </Project>
