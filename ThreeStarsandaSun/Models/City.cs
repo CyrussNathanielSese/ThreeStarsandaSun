@@ -11,7 +11,7 @@ namespace ThreeStarsandaSun.Models
 
 
         public ICollection<Store> Stores { get; set; }
-        public ICollection<Event> Event { get; set; }
+        public ICollection<Event> Events { get; set; }
         public ICollection<Restaurant> Restaurant { get; set; }
     }
 }
