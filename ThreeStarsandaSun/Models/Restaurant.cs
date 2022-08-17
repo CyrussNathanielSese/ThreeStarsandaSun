@@ -19,7 +19,7 @@ namespace ThreeStarsandaSun.Models
 
         [Display(Name = "City")]
         [Required]
-        public string CityName { get; set; }
+        public int CityID { get; set; }
         public City City { get; set; }
 
 

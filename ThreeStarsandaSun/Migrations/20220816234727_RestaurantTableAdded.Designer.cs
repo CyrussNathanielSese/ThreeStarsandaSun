@@ -12,7 +12,7 @@ using ThreeStarsandaSun.Areas.Identity.Data;
 namespace ThreeStarsandaSun.Migrations
 {
     [DbContext(typeof(ThreeStarsandaSunContextDb))]
-    [Migration("20220816021134_RestaurantTableAdded")]
+    [Migration("20220816234727_RestaurantTableAdded")]
     partial class RestaurantTableAdded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -286,10 +286,6 @@ namespace ThreeStarsandaSun.Migrations
 
                     b.Property<int>("CityID")
                         .HasColumnType("int");
-
-                    b.Property<string>("CityName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RestaurantAddress")
                         .IsRequired()

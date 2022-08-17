@@ -285,10 +285,6 @@ namespace ThreeStarsandaSun.Migrations
                     b.Property<int>("CityID")
                         .HasColumnType("int");
 
-                    b.Property<string>("CityName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("RestaurantAddress")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");

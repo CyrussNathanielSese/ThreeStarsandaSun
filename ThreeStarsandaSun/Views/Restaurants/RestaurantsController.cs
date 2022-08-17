@@ -22,9 +22,8 @@ namespace ThreeStarsandaSun.Views.Restaurants
         // GET: Restaurants
         public async Task<IActionResult> Index()
         {
-              return _context.Restaurant != null ? 
-                          View(await _context.Restaurant.ToListAsync()) :
-                          Problem("Entity set 'ThreeStarsandaSunContextDb.Restaurant'  is null.");
+            var threeStarsandaSunContextDb = _context.Restaurant.Include(r => r.City);
+            return View(await threeStarsandaSunContextDb.ToListAsync());
         }
 
         // GET: Restaurants/Details/5
@@ -36,6 +35,7 @@ namespace ThreeStarsandaSun.Views.Restaurants
             }
 
             var restaurant = await _context.Restaurant
+                .Include(r => r.City)
                 .FirstOrDefaultAsync(m => m.RestaurantID == id);
             if (restaurant == null)
             {
@@ -48,6 +48,7 @@ namespace ThreeStarsandaSun.Views.Restaurants
         // GET: Restaurants/Create
         public IActionResult Create()
         {
+            ViewData["CityID"] = new SelectList(_context.City, "CityID", "CityName");
             return View();
         }
 
@@ -56,14 +57,15 @@ namespace ThreeStarsandaSun.Views.Restaurants
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("RestaurantID,RestaurantName,RestaurantAddress,RestaurantNum,CityName")] Restaurant restaurant)
+        public async Task<IActionResult> Create([Bind("RestaurantID,RestaurantName,RestaurantAddress,RestaurantNum,CityID")] Restaurant restaurant)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 _context.Add(restaurant);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CityID"] = new SelectList(_context.City, "CityID", "CityName", restaurant.CityID);
             return View(restaurant);
         }
 
@@ -80,6 +82,7 @@ namespace ThreeStarsandaSun.Views.Restaurants
             {
                 return NotFound();
             }
+            ViewData["CityID"] = new SelectList(_context.City, "CityID", "CityName", restaurant.CityID);
             return View(restaurant);
         }
 
@@ -88,14 +91,14 @@ namespace ThreeStarsandaSun.Views.Restaurants
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("RestaurantID,RestaurantName,RestaurantAddress,RestaurantNum,CityName")] Restaurant restaurant)
+        public async Task<IActionResult> Edit(int id, [Bind("RestaurantID,RestaurantName,RestaurantAddress,RestaurantNum,CityID")] Restaurant restaurant)
         {
             if (id != restaurant.RestaurantID)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 try
                 {
@@ -115,6 +118,7 @@ namespace ThreeStarsandaSun.Views.Restaurants
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CityID"] = new SelectList(_context.City, "CityID", "CityName", restaurant.CityID);
             return View(restaurant);
         }
 
@@ -127,6 +131,7 @@ namespace ThreeStarsandaSun.Views.Restaurants
             }
 
             var restaurant = await _context.Restaurant
+                .Include(r => r.City)
                 .FirstOrDefaultAsync(m => m.RestaurantID == id);
             if (restaurant == null)
             {
