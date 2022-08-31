@@ -48,7 +48,7 @@ namespace ThreeStarsandaSun.Views.Restaurants
         // GET: Restaurants/Create
         public IActionResult Create()
         {
-            ViewData["CityID"] = new SelectList(_context.City, "CityID", "CityName");
+            ViewData["CityID"] = new SelectList(_context.City, "CityName", "CityName");
             return View();
         }
 
@@ -65,7 +65,7 @@ namespace ThreeStarsandaSun.Views.Restaurants
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CityID"] = new SelectList(_context.City, "CityID", "CityName", restaurant.CityID);
+            ViewData["CityID"] = new SelectList(_context.City, "CityName", "CityID", restaurant.CityID);
             return View(restaurant);
         }
 
@@ -82,7 +82,7 @@ namespace ThreeStarsandaSun.Views.Restaurants
             {
                 return NotFound();
             }
-            ViewData["CityID"] = new SelectList(_context.City, "CityID", "CityName", restaurant.CityID);
+            ViewData["CityID"] = new SelectList(_context.City, "CityID", "CityID", restaurant.CityID);
             return View(restaurant);
         }
 
@@ -118,7 +118,7 @@ namespace ThreeStarsandaSun.Views.Restaurants
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CityID"] = new SelectList(_context.City, "CityID", "CityName", restaurant.CityID);
+            ViewData["CityID"] = new SelectList(_context.City, "CityID", "CityID", restaurant.CityID);
             return View(restaurant);
         }
 

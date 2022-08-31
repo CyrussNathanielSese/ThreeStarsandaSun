@@ -12,8 +12,8 @@ using ThreeStarsandaSun.Areas.Identity.Data;
 namespace ThreeStarsandaSun.Migrations
 {
     [DbContext(typeof(ThreeStarsandaSunContextDb))]
-    [Migration("20220816234727_RestaurantTableAdded")]
-    partial class RestaurantTableAdded
+    [Migration("20220831225537_restauranttableadded")]
+    partial class restauranttableadded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

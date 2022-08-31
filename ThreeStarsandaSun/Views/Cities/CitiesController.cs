@@ -95,7 +95,7 @@ namespace ThreeStarsandaSun.Views.Cities
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 try
                 {
