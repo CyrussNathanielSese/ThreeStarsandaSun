@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ThreeStarsandaSun.Areas.Identity.Data;
 using ThreeStarsandaSun.Models;
 
-namespace ThreeStarsandaSun.Views.Restaurants
+namespace ThreeStarsandaSun.Controllers
 {
     public class RestaurantsController : Controller
     {
@@ -48,7 +48,7 @@ namespace ThreeStarsandaSun.Views.Restaurants
         // GET: Restaurants/Create
         public IActionResult Create()
         {
-            ViewData["CityID"] = new SelectList(_context.City, "CityName", "CityName");
+            ViewData["CityID"] = new SelectList(_context.City, "CityID", "CityID");
             return View();
         }
 
@@ -65,7 +65,7 @@ namespace ThreeStarsandaSun.Views.Restaurants
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CityID"] = new SelectList(_context.City, "CityName", "CityID", restaurant.CityID);
+            ViewData["CityID"] = new SelectList(_context.City, "CityID", "CityID", restaurant.CityID);
             return View(restaurant);
         }
 
@@ -155,14 +155,14 @@ namespace ThreeStarsandaSun.Views.Restaurants
             {
                 _context.Restaurant.Remove(restaurant);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool RestaurantExists(int id)
         {
-          return (_context.Restaurant?.Any(e => e.RestaurantID == id)).GetValueOrDefault();
+            return (_context.Restaurant?.Any(e => e.RestaurantID == id)).GetValueOrDefault();
         }
     }
 }

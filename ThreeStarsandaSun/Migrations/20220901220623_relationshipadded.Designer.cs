@@ -12,8 +12,8 @@ using ThreeStarsandaSun.Areas.Identity.Data;
 namespace ThreeStarsandaSun.Migrations
 {
     [DbContext(typeof(ThreeStarsandaSunContextDb))]
-    [Migration("20220831225537_restauranttableadded")]
-    partial class restauranttableadded
+    [Migration("20220901220623_relationshipadded")]
+    partial class relationshipadded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -251,12 +251,12 @@ namespace ThreeStarsandaSun.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EventID"), 1L, 1);
 
-                    b.Property<int>("CityID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CityName")
+                    b.Property<string>("CityID")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CityID1")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("DateTime")
                         .HasColumnType("datetime2");
@@ -271,7 +271,7 @@ namespace ThreeStarsandaSun.Migrations
 
                     b.HasKey("EventID");
 
-                    b.HasIndex("CityID");
+                    b.HasIndex("CityID1");
 
                     b.ToTable("Event");
                 });
@@ -393,7 +393,7 @@ namespace ThreeStarsandaSun.Migrations
                 {
                     b.HasOne("ThreeStarsandaSun.Models.City", "City")
                         .WithMany("Events")
-                        .HasForeignKey("CityID")
+                        .HasForeignKey("CityID1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
