@@ -15,7 +15,7 @@ namespace ThreeStarsandaSun.Models
         public int StoreContactNumber { get; set; }
         [Display(Name = "City")]
         [Required]
-        public string CityName { get; set; }
+        public int CityID { get; set; }
         public City City { get; set; }
 
     }

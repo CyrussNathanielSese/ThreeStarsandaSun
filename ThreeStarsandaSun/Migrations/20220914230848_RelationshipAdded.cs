@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ThreeStarsandaSun.Migrations
 {
-    public partial class relationshipadded : Migration
+    public partial class RelationshipAdded : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -31,15 +31,14 @@ namespace ThreeStarsandaSun.Migrations
                     EventName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     EventAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CityID = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CityID1 = table.Column<int>(type: "int", nullable: false)
+                    CityID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Event", x => x.EventID);
                     table.ForeignKey(
-                        name: "FK_Event_City_CityID1",
-                        column: x => x.CityID1,
+                        name: "FK_Event_City_CityID",
+                        column: x => x.CityID,
                         principalTable: "City",
                         principalColumn: "CityID",
                         onDelete: ReferentialAction.Cascade);
@@ -76,7 +75,6 @@ namespace ThreeStarsandaSun.Migrations
                     StoreName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StoreAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StoreContactNumber = table.Column<int>(type: "int", nullable: false),
-                    CityName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CityID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -91,9 +89,9 @@ namespace ThreeStarsandaSun.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Event_CityID1",
+                name: "IX_Event_CityID",
                 table: "Event",
-                column: "CityID1");
+                column: "CityID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Restaurant_CityID",

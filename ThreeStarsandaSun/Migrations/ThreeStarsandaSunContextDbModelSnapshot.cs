@@ -249,11 +249,7 @@ namespace ThreeStarsandaSun.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EventID"), 1L, 1);
 
-                    b.Property<string>("CityID")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("CityID1")
+                    b.Property<int>("CityID")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DateTime")
@@ -269,7 +265,7 @@ namespace ThreeStarsandaSun.Migrations
 
                     b.HasKey("EventID");
 
-                    b.HasIndex("CityID1");
+                    b.HasIndex("CityID");
 
                     b.ToTable("Event");
                 });
@@ -313,10 +309,6 @@ namespace ThreeStarsandaSun.Migrations
 
                     b.Property<int>("CityID")
                         .HasColumnType("int");
-
-                    b.Property<string>("CityName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("StoreAddress")
                         .IsRequired()
@@ -391,7 +383,7 @@ namespace ThreeStarsandaSun.Migrations
                 {
                     b.HasOne("ThreeStarsandaSun.Models.City", "City")
                         .WithMany("Events")
-                        .HasForeignKey("CityID1")
+                        .HasForeignKey("CityID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

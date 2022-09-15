@@ -10,90 +10,87 @@ using ThreeStarsandaSun.Models;
 
 namespace ThreeStarsandaSun.Controllers
 {
-    public class RestaurantsController : Controller
+    public class CitiesController : Controller
     {
         private readonly ThreeStarsandaSunContextDb _context;
 
-        public RestaurantsController(ThreeStarsandaSunContextDb context)
+        public CitiesController(ThreeStarsandaSunContextDb context)
         {
             _context = context;
         }
 
-        // GET: Restaurants
+        // GET: Cities
         public async Task<IActionResult> Index()
         {
-            var threeStarsandaSunContextDb = _context.Restaurant.Include(r => r.City);
-            return View(await threeStarsandaSunContextDb.ToListAsync());
+            return _context.City != null ?
+                        View(await _context.City.ToListAsync()) :
+                        Problem("Entity set 'ThreeStarsandaSunContextDb.City'  is null.");
         }
 
-        // GET: Restaurants/Details/5
+        // GET: Cities/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Restaurant == null)
+            if (id == null || _context.City == null)
             {
                 return NotFound();
             }
 
-            var restaurant = await _context.Restaurant
-                .Include(r => r.City)
-                .FirstOrDefaultAsync(m => m.RestaurantID == id);
-            if (restaurant == null)
+            var city = await _context.City
+                .FirstOrDefaultAsync(m => m.CityID == id);
+            if (city == null)
             {
                 return NotFound();
             }
 
-            return View(restaurant);
+            return View(city);
         }
 
-        // GET: Restaurants/Create
+        // GET: Cities/Create
         public IActionResult Create()
         {
-            ViewData["CityID"] = new SelectList(_context.City, "CityID", "CityID");
             return View();
         }
 
-        // POST: Restaurants/Create
+        // POST: Cities/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("RestaurantID,RestaurantName,RestaurantAddress,RestaurantNum,CityID")] Restaurant restaurant)
+        public async Task<IActionResult> Create([Bind("CityID,CityName")] City city)
         {
             if (!ModelState.IsValid)
             {
-                _context.Add(restaurant);
+                _context.Add(city);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CityID"] = new SelectList(_context.City, "CityID", "CityID", restaurant.CityID);
-            return View(restaurant);
+            return View(city);
         }
 
-        // GET: Restaurants/Edit/5
+        // GET: Cities/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Restaurant == null)
+            if (id == null || _context.City == null)
             {
                 return NotFound();
             }
 
-            var restaurant = await _context.Restaurant.FindAsync(id);
-            if (restaurant == null)
+            var city = await _context.City.FindAsync(id);
+            if (city == null)
             {
                 return NotFound();
             }
-            ViewData["CityID"] = new SelectList(_context.City, "CityID", "CityID", restaurant.CityID);
-            return View(restaurant);
+            return View(city);
         }
 
-        // POST: Restaurants/Edit/5
+        // POST: Cities/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("RestaurantID,RestaurantName,RestaurantAddress,RestaurantNum,CityID")] Restaurant restaurant)
+        public async Task<IActionResult> Edit(int id, [Bind("CityID,CityName")] City city)
         {
-            if (id != restaurant.RestaurantID)
+            if (id != city.CityID)
             {
                 return NotFound();
             }
@@ -102,12 +99,12 @@ namespace ThreeStarsandaSun.Controllers
             {
                 try
                 {
-                    _context.Update(restaurant);
+                    _context.Update(city);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!RestaurantExists(restaurant.RestaurantID))
+                    if (!CityExists(city.CityID))
                     {
                         return NotFound();
                     }
@@ -118,51 +115,49 @@ namespace ThreeStarsandaSun.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CityID"] = new SelectList(_context.City, "CityID", "CityID", restaurant.CityID);
-            return View(restaurant);
+            return View(city);
         }
 
-        // GET: Restaurants/Delete/5
+        // GET: Cities/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Restaurant == null)
+            if (id == null || _context.City == null)
             {
                 return NotFound();
             }
 
-            var restaurant = await _context.Restaurant
-                .Include(r => r.City)
-                .FirstOrDefaultAsync(m => m.RestaurantID == id);
-            if (restaurant == null)
+            var city = await _context.City
+                .FirstOrDefaultAsync(m => m.CityID == id);
+            if (city == null)
             {
                 return NotFound();
             }
 
-            return View(restaurant);
+            return View(city);
         }
 
-        // POST: Restaurants/Delete/5
+        // POST: Cities/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Restaurant == null)
+            if (_context.City == null)
             {
-                return Problem("Entity set 'ThreeStarsandaSunContextDb.Restaurant'  is null.");
+                return Problem("Entity set 'ThreeStarsandaSunContextDb.City'  is null.");
             }
-            var restaurant = await _context.Restaurant.FindAsync(id);
-            if (restaurant != null)
+            var city = await _context.City.FindAsync(id);
+            if (city != null)
             {
-                _context.Restaurant.Remove(restaurant);
+                _context.City.Remove(city);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool RestaurantExists(int id)
+        private bool CityExists(int id)
         {
-            return (_context.Restaurant?.Any(e => e.RestaurantID == id)).GetValueOrDefault();
+            return (_context.City?.Any(e => e.CityID == id)).GetValueOrDefault();
         }
     }
 }

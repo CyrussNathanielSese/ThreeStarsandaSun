@@ -8,89 +8,89 @@ using Microsoft.EntityFrameworkCore;
 using ThreeStarsandaSun.Areas.Identity.Data;
 using ThreeStarsandaSun.Models;
 
-namespace ThreeStarsandaSun.Views.Cities
+namespace ThreeStarsandaSun.Controllers
 {
-    public class CitiesController : Controller
+    public class StoresController : Controller
     {
         private readonly ThreeStarsandaSunContextDb _context;
 
-        public CitiesController(ThreeStarsandaSunContextDb context)
+        public StoresController(ThreeStarsandaSunContextDb context)
         {
             _context = context;
         }
 
-        // GET: Cities
+        // GET: Stores
         public async Task<IActionResult> Index()
         {
-              return _context.City != null ? 
-                          View(await _context.City.ToListAsync()) :
-                          Problem("Entity set 'ThreeStarsandaSunContextDb.City'  is null.");
+            return _context.Store != null ?
+                        View(await _context.Store.ToListAsync()) :
+                        Problem("Entity set 'ThreeStarsandaSunContextDb.Store'  is null.");
         }
 
-        // GET: Cities/Details/5
+        // GET: Stores/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.City == null)
+            if (id == null || _context.Store == null)
             {
                 return NotFound();
             }
 
-            var city = await _context.City
-                .FirstOrDefaultAsync(m => m.CityID == id);
-            if (city == null)
+            var store = await _context.Store
+                .FirstOrDefaultAsync(m => m.StoreID == id);
+            if (store == null)
             {
                 return NotFound();
             }
 
-            return View(city);
+            return View(store);
         }
 
-        // GET: Cities/Create
+        // GET: Stores/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Cities/Create
+        // POST: Stores/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CityID,CityName")] City city)
+        public async Task<IActionResult> Create([Bind("StoreID,StoreName,StoreAddress,StoreContactNumber,CityID")] Store store)
         {
             if (!ModelState.IsValid)
             {
-                _context.Add(city);
+                _context.Add(store);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(city);
+            return View(store);
         }
 
-        // GET: Cities/Edit/5
+        // GET: Stores/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.City == null)
+            if (id == null || _context.Store == null)
             {
                 return NotFound();
             }
 
-            var city = await _context.City.FindAsync(id);
-            if (city == null)
+            var store = await _context.Store.FindAsync(id);
+            if (store == null)
             {
                 return NotFound();
             }
-            return View(city);
+            return View(store);
         }
 
-        // POST: Cities/Edit/5
+        // POST: Stores/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CityID,CityName")] City city)
+        public async Task<IActionResult> Edit(int id, [Bind("StoreID,StoreName,StoreAddress,StoreContactNumber,CityID")] Store store)
         {
-            if (id != city.CityID)
+            if (id != store.StoreID)
             {
                 return NotFound();
             }
@@ -99,12 +99,12 @@ namespace ThreeStarsandaSun.Views.Cities
             {
                 try
                 {
-                    _context.Update(city);
+                    _context.Update(store);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CityExists(city.CityID))
+                    if (!StoreExists(store.StoreID))
                     {
                         return NotFound();
                     }
@@ -115,49 +115,49 @@ namespace ThreeStarsandaSun.Views.Cities
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(city);
+            return View(store);
         }
 
-        // GET: Cities/Delete/5
+        // GET: Stores/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.City == null)
+            if (id == null || _context.Store == null)
             {
                 return NotFound();
             }
 
-            var city = await _context.City
-                .FirstOrDefaultAsync(m => m.CityID == id);
-            if (city == null)
+            var store = await _context.Store
+                .FirstOrDefaultAsync(m => m.StoreID == id);
+            if (store == null)
             {
                 return NotFound();
             }
 
-            return View(city);
+            return View(store);
         }
 
-        // POST: Cities/Delete/5
+        // POST: Stores/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.City == null)
+            if (_context.Store == null)
             {
-                return Problem("Entity set 'ThreeStarsandaSunContextDb.City'  is null.");
+                return Problem("Entity set 'ThreeStarsandaSunContextDb.Store'  is null.");
             }
-            var city = await _context.City.FindAsync(id);
-            if (city != null)
+            var store = await _context.Store.FindAsync(id);
+            if (store != null)
             {
-                _context.City.Remove(city);
+                _context.Store.Remove(store);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CityExists(int id)
+        private bool StoreExists(int id)
         {
-          return (_context.City?.Any(e => e.CityID == id)).GetValueOrDefault();
+            return (_context.Store?.Any(e => e.StoreID == id)).GetValueOrDefault();
         }
     }
 }
