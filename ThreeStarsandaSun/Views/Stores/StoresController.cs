@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ThreeStarsandaSun.Areas.Identity.Data;
 using ThreeStarsandaSun.Models;
 
-namespace ThreeStarsandaSun.Controllers
+namespace ThreeStarsandaSun.Views.Stores
 {
     public class StoresController : Controller
     {
@@ -22,9 +22,8 @@ namespace ThreeStarsandaSun.Controllers
         // GET: Stores
         public async Task<IActionResult> Index()
         {
-            return _context.Store != null ?
-                        View(await _context.Store.ToListAsync()) :
-                        Problem("Entity set 'ThreeStarsandaSunContextDb.Store'  is null.");
+            var threeStarsandaSunContextDb = _context.Store.Include(s => s.City);
+            return View(await threeStarsandaSunContextDb.ToListAsync());
         }
 
         // GET: Stores/Details/5
@@ -36,6 +35,7 @@ namespace ThreeStarsandaSun.Controllers
             }
 
             var store = await _context.Store
+                .Include(s => s.City)
                 .FirstOrDefaultAsync(m => m.StoreID == id);
             if (store == null)
             {
@@ -48,6 +48,7 @@ namespace ThreeStarsandaSun.Controllers
         // GET: Stores/Create
         public IActionResult Create()
         {
+            ViewData["CityID"] = new SelectList(_context.City, "CityID", "CityName");
             return View();
         }
 
@@ -64,6 +65,7 @@ namespace ThreeStarsandaSun.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CityID"] = new SelectList(_context.City, "CityID", "CityID", store.CityID);
             return View(store);
         }
 
@@ -80,6 +82,7 @@ namespace ThreeStarsandaSun.Controllers
             {
                 return NotFound();
             }
+            ViewData["CityID"] = new SelectList(_context.City, "CityID", "CityName", store.CityID);
             return View(store);
         }
 
@@ -115,6 +118,7 @@ namespace ThreeStarsandaSun.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CityID"] = new SelectList(_context.City, "CityID", "CityID", store.CityID);
             return View(store);
         }
 
@@ -127,6 +131,7 @@ namespace ThreeStarsandaSun.Controllers
             }
 
             var store = await _context.Store
+                .Include(s => s.City)
                 .FirstOrDefaultAsync(m => m.StoreID == id);
             if (store == null)
             {
@@ -150,14 +155,14 @@ namespace ThreeStarsandaSun.Controllers
             {
                 _context.Store.Remove(store);
             }
-
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool StoreExists(int id)
         {
-            return (_context.Store?.Any(e => e.StoreID == id)).GetValueOrDefault();
+          return _context.Store.Any(e => e.StoreID == id);
         }
     }
 }

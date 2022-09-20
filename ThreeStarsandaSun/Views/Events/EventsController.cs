@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ThreeStarsandaSun.Areas.Identity.Data;
 using ThreeStarsandaSun.Models;
 
-namespace ThreeStarsandaSun.Controllers
+namespace ThreeStarsandaSun.Views.Events
 {
     public class EventsController : Controller
     {
@@ -22,9 +22,8 @@ namespace ThreeStarsandaSun.Controllers
         // GET: Events
         public async Task<IActionResult> Index()
         {
-            return _context.Event != null ?
-                        View(await _context.Event.ToListAsync()) :
-                        Problem("Entity set 'ThreeStarsandaSunContextDb.Event'  is null.");
+            var threeStarsandaSunContextDb = _context.Event.Include(r => r.City);
+            return View(await threeStarsandaSunContextDb.ToListAsync());
         }
 
         // GET: Events/Details/5
@@ -36,6 +35,7 @@ namespace ThreeStarsandaSun.Controllers
             }
 
             var @event = await _context.Event
+                .Include(r => r.City)
                 .FirstOrDefaultAsync(m => m.EventID == id);
             if (@event == null)
             {
@@ -48,6 +48,7 @@ namespace ThreeStarsandaSun.Controllers
         // GET: Events/Create
         public IActionResult Create()
         {
+            ViewData["CityID"] = new SelectList(_context.City, "CityID", "CityName");
             return View();
         }
 
@@ -64,6 +65,7 @@ namespace ThreeStarsandaSun.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CityID"] = new SelectList(_context.City, "CityID", "CityID", @event.CityID);
             return View(@event);
         }
 
@@ -80,6 +82,7 @@ namespace ThreeStarsandaSun.Controllers
             {
                 return NotFound();
             }
+            ViewData["CityID"] = new SelectList(_context.City, "CityID", "CityName", @event.CityID);
             return View(@event);
         }
 
@@ -115,6 +118,7 @@ namespace ThreeStarsandaSun.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CityID"] = new SelectList(_context.City, "CityID", "CityID", @event.CityID);
             return View(@event);
         }
 
@@ -127,6 +131,7 @@ namespace ThreeStarsandaSun.Controllers
             }
 
             var @event = await _context.Event
+                .Include(r => r.City)
                 .FirstOrDefaultAsync(m => m.EventID == id);
             if (@event == null)
             {
@@ -150,14 +155,14 @@ namespace ThreeStarsandaSun.Controllers
             {
                 _context.Event.Remove(@event);
             }
-
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool EventExists(int id)
         {
-            return (_context.Event?.Any(e => e.EventID == id)).GetValueOrDefault();
+          return _context.Event.Any(e => e.EventID == id);
         }
     }
 }

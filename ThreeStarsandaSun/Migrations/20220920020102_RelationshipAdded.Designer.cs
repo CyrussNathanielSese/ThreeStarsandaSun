@@ -12,14 +12,14 @@ using ThreeStarsandaSun.Areas.Identity.Data;
 namespace ThreeStarsandaSun.Migrations
 {
     [DbContext(typeof(ThreeStarsandaSunContextDb))]
-    [Migration("20220914230848_RelationshipAdded")]
+    [Migration("20220920020102_RelationshipAdded")]
     partial class RelationshipAdded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.8")
+                .HasAnnotation("ProductVersion", "6.0.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);

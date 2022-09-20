@@ -48,7 +48,7 @@ namespace ThreeStarsandaSun.Views.Restaurants
         // GET: Restaurants/Create
         public IActionResult Create()
         {
-            ViewData["CityID"] = new SelectList(_context.City, "CityID", "CityID");
+            ViewData["CityID"] = new SelectList(_context.City, "CityID", "CityName");
             return View();
         }
 
@@ -82,7 +82,7 @@ namespace ThreeStarsandaSun.Views.Restaurants
             {
                 return NotFound();
             }
-            ViewData["CityID"] = new SelectList(_context.City, "CityID", "CityID", restaurant.CityID);
+            ViewData["CityID"] = new SelectList(_context.City, "CityID", "CityName", restaurant.CityID);
             return View(restaurant);
         }
 
