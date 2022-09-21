@@ -1,34 +1,30 @@
-﻿using System.Linq;
-using ThreeStarsandaSun.Areas.Identity.Data;
+﻿using ThreeStarsandaSun.Data;
 using ThreeStarsandaSun.Models;
-using ThreeStarsandaSun.Data;
-
+using System;
+using System.Linq;
+using ThreeStarsandaSun.Areas.Identity.Data;
 
 namespace ThreeStarsandaSun.Data
 {
-    public static class DbInitialiser
+    public static class DbInitializer
     {
-        public static void Initialize(ThreeStarsandaSunContextDb context)
+        public static void Seed(ThreeStarsandaSunContextDb context)
         {
             context.Database.EnsureCreated();
+
+            // Look for any city.
             if (context.City.Any())
             {
-                return;
+                return;   // DB has been seeded
             }
 
-
-            var city = new City[]
+            var cities = new City[]
             {
-                new City { CityName = "Mommy?",}
+              new City { CityName = "CITY?!"},
             };
 
-            context.City.AddRange(city);
+            context.City.AddRange(cities);
             context.SaveChanges();
-
-            //var evenT = new Event[]
-            //{
-            //    new Event { EventName = "", EventAddress = "", DateTime = }
-            //};
 
         }
     }

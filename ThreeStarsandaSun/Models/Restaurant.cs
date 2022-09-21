@@ -14,7 +14,7 @@ namespace ThreeStarsandaSun.Models
         [Required]
         public string RestaurantAddress { get; set; }
 
-        [Display(Name = "Number")]
+        [Display(Name = "Contact Number")]
         public int RestaurantNum { get; set; }
 
         [Display(Name = "City")]

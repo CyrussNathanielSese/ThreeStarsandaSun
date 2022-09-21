@@ -238,7 +238,7 @@ namespace ThreeStarsandaSun.Migrations
 
                     b.HasKey("CityID");
 
-                    b.ToTable("City");
+                    b.ToTable("City", (string)null);
                 });
 
             modelBuilder.Entity("ThreeStarsandaSun.Models.Event", b =>
@@ -267,7 +267,7 @@ namespace ThreeStarsandaSun.Migrations
 
                     b.HasIndex("CityID");
 
-                    b.ToTable("Event");
+                    b.ToTable("Event", (string)null);
                 });
 
             modelBuilder.Entity("ThreeStarsandaSun.Models.Restaurant", b =>
@@ -296,7 +296,7 @@ namespace ThreeStarsandaSun.Migrations
 
                     b.HasIndex("CityID");
 
-                    b.ToTable("Restaurant");
+                    b.ToTable("Restaurant", (string)null);
                 });
 
             modelBuilder.Entity("ThreeStarsandaSun.Models.Store", b =>
@@ -325,7 +325,7 @@ namespace ThreeStarsandaSun.Migrations
 
                     b.HasIndex("CityID");
 
-                    b.ToTable("Store");
+                    b.ToTable("Store", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
