@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using ThreeStarsandaSun.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ThreeStarsandaSun.Controllers
 {

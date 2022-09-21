@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ThreeStarsandaSun.Areas.Identity.Data;
+using Microsoft.AspNetCore.Authorization;
 using ThreeStarsandaSun.Models;
 
-namespace ThreeStarsandaSun.Views.Restaurants
+namespace ThreeStarsandaSun.Controllers
 {
     public class RestaurantsController : Controller
     {
@@ -44,14 +46,15 @@ namespace ThreeStarsandaSun.Views.Restaurants
 
             return View(restaurant);
         }
-
+        [Authorize]
         // GET: Restaurants/Create
+        [Authorize]
         public IActionResult Create()
         {
             ViewData["CityID"] = new SelectList(_context.City, "CityID", "CityName");
             return View();
         }
-
+        
         // POST: Restaurants/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -68,7 +71,7 @@ namespace ThreeStarsandaSun.Views.Restaurants
             ViewData["CityID"] = new SelectList(_context.City, "CityID", "CityID", restaurant.CityID);
             return View(restaurant);
         }
-
+        [Authorize]
         // GET: Restaurants/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -85,7 +88,7 @@ namespace ThreeStarsandaSun.Views.Restaurants
             ViewData["CityID"] = new SelectList(_context.City, "CityID", "CityName", restaurant.CityID);
             return View(restaurant);
         }
-
+        [Authorize]
         // POST: Restaurants/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -121,7 +124,7 @@ namespace ThreeStarsandaSun.Views.Restaurants
             ViewData["CityID"] = new SelectList(_context.City, "CityID", "CityID", restaurant.CityID);
             return View(restaurant);
         }
-
+        [Authorize]
         // GET: Restaurants/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -140,7 +143,7 @@ namespace ThreeStarsandaSun.Views.Restaurants
 
             return View(restaurant);
         }
-
+        [Authorize]
         // POST: Restaurants/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

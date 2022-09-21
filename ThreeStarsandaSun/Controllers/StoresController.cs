@@ -6,94 +6,95 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ThreeStarsandaSun.Areas.Identity.Data;
+using Microsoft.AspNetCore.Authorization;
 using ThreeStarsandaSun.Models;
 
-namespace ThreeStarsandaSun.Views.Events
+namespace ThreeStarsandaSun.Controllers
 {
-    public class EventsController : Controller
+    public class StoresController : Controller
     {
         private readonly ThreeStarsandaSunContextDb _context;
 
-        public EventsController(ThreeStarsandaSunContextDb context)
+        public StoresController(ThreeStarsandaSunContextDb context)
         {
             _context = context;
         }
 
-        // GET: Events
+        // GET: Stores
         public async Task<IActionResult> Index()
         {
-            var threeStarsandaSunContextDb = _context.Event.Include(r => r.City);
+            var threeStarsandaSunContextDb = _context.Store.Include(s => s.City);
             return View(await threeStarsandaSunContextDb.ToListAsync());
         }
 
-        // GET: Events/Details/5
+        // GET: Stores/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Event == null)
+            if (id == null || _context.Store == null)
             {
                 return NotFound();
             }
 
-            var @event = await _context.Event
-                .Include(r => r.City)
-                .FirstOrDefaultAsync(m => m.EventID == id);
-            if (@event == null)
+            var store = await _context.Store
+                .Include(s => s.City)
+                .FirstOrDefaultAsync(m => m.StoreID == id);
+            if (store == null)
             {
                 return NotFound();
             }
 
-            return View(@event);
+            return View(store);
         }
-
-        // GET: Events/Create
+        [Authorize]
+        // GET: Stores/Create
         public IActionResult Create()
         {
             ViewData["CityID"] = new SelectList(_context.City, "CityID", "CityName");
             return View();
         }
 
-        // POST: Events/Create
+        // POST: Stores/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EventID,EventName,EventAddress,DateTime,CityID")] Event @event)
+        public async Task<IActionResult> Create([Bind("StoreID,StoreName,StoreAddress,StoreContactNumber,CityID")] Store store)
         {
             if (!ModelState.IsValid)
             {
-                _context.Add(@event);
+                _context.Add(store);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CityID"] = new SelectList(_context.City, "CityID", "CityID", @event.CityID);
-            return View(@event);
+            ViewData["CityID"] = new SelectList(_context.City, "CityID", "CityID", store.CityID);
+            return View(store);
         }
-
-        // GET: Events/Edit/5
+        [Authorize]
+        // GET: Stores/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Event == null)
+            if (id == null || _context.Store == null)
             {
                 return NotFound();
             }
 
-            var @event = await _context.Event.FindAsync(id);
-            if (@event == null)
+            var store = await _context.Store.FindAsync(id);
+            if (store == null)
             {
                 return NotFound();
             }
-            ViewData["CityID"] = new SelectList(_context.City, "CityID", "CityName", @event.CityID);
-            return View(@event);
+            ViewData["CityID"] = new SelectList(_context.City, "CityID", "CityName", store.CityID);
+            return View(store);
         }
-
-        // POST: Events/Edit/5
+        [Authorize]
+        // POST: Stores/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("EventID,EventName,EventAddress,DateTime,CityID")] Event @event)
+        public async Task<IActionResult> Edit(int id, [Bind("StoreID,StoreName,StoreAddress,StoreContactNumber,CityID")] Store store)
         {
-            if (id != @event.EventID)
+            if (id != store.StoreID)
             {
                 return NotFound();
             }
@@ -102,12 +103,12 @@ namespace ThreeStarsandaSun.Views.Events
             {
                 try
                 {
-                    _context.Update(@event);
+                    _context.Update(store);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!EventExists(@event.EventID))
+                    if (!StoreExists(store.StoreID))
                     {
                         return NotFound();
                     }
@@ -118,51 +119,51 @@ namespace ThreeStarsandaSun.Views.Events
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CityID"] = new SelectList(_context.City, "CityID", "CityID", @event.CityID);
-            return View(@event);
+            ViewData["CityID"] = new SelectList(_context.City, "CityID", "CityID", store.CityID);
+            return View(store);
         }
-
-        // GET: Events/Delete/5
+        [Authorize]
+        // GET: Stores/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Event == null)
+            if (id == null || _context.Store == null)
             {
                 return NotFound();
             }
 
-            var @event = await _context.Event
-                .Include(r => r.City)
-                .FirstOrDefaultAsync(m => m.EventID == id);
-            if (@event == null)
+            var store = await _context.Store
+                .Include(s => s.City)
+                .FirstOrDefaultAsync(m => m.StoreID == id);
+            if (store == null)
             {
                 return NotFound();
             }
 
-            return View(@event);
+            return View(store);
         }
-
-        // POST: Events/Delete/5
+        [Authorize]
+        // POST: Stores/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Event == null)
+            if (_context.Store == null)
             {
-                return Problem("Entity set 'ThreeStarsandaSunContextDb.Event'  is null.");
+                return Problem("Entity set 'ThreeStarsandaSunContextDb.Store'  is null.");
             }
-            var @event = await _context.Event.FindAsync(id);
-            if (@event != null)
+            var store = await _context.Store.FindAsync(id);
+            if (store != null)
             {
-                _context.Event.Remove(@event);
+                _context.Store.Remove(store);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool EventExists(int id)
+        private bool StoreExists(int id)
         {
-          return _context.Event.Any(e => e.EventID == id);
+            return _context.Store.Any(e => e.StoreID == id);
         }
     }
 }
