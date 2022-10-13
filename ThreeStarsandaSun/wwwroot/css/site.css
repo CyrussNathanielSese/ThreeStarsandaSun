@@ -17,3 +17,42 @@ body {
   margin-bottom: 60px;
 }
 
+h1 {
+    text-align: center;
+    background: yellow;
+}
+
+h1.CityHead
+{
+    text-align: left;
+    background: none;
+}
+
+h1.EventHead 
+{
+    text-align: left;
+    background: none;
+}
+
+h1.RestoHead 
+{
+    text-align: left;
+    background: none;
+}
+
+h1.StoreHead
+{
+    text-align: left;
+    background: none;
+}
+
+h1.PrivacyHeading
+{
+    text-align: left;
+    background: none;
+}
+
+.CityPhoto
+{
+    background-image: url(wwwroot/img/aucklandcityphoto.jpg);
+}
