@@ -21,6 +21,10 @@ h1 {
     text-align: center;
     background: yellow;
 }
+h2.HomeH2
+{
+    color: white;
+}
 
 h1.CityHead
 {
@@ -58,10 +62,56 @@ h1.PrivacyHeading
     background-size: cover;
 }
 
+.RestaurantPhoto
+{
+}
+
+.EventPhoto
+{
+
+}
+
+.StorePhoto
+{
+
+}
 
 
 
-.aklContainer {
+#HomeBackground {
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+
+    animation: fader 30s cubic-bezier(.8,0,0,8) infinite;
+    background: url(/img/banauericeterraces.png);
+}
+
+#Wrapper
+{
+
+}
+
+@keyframes fader 
+{
+    3% {
+        background: url(/img/banauericeterraces.png); background-size:cover;
+    }
+    30% {
+        background: url(/img/aucklandcityphoto.jpg); background-size:cover;
+    }
+    40% {
+        background: url();
+    }
+}
+
+
+
+
+
+
+
+/*.aklContainer {
     position: relative;
     width: 50%;
 }
@@ -70,7 +120,7 @@ h1.PrivacyHeading
     width: 100%;
     height: auto;
 }
-.akloverlay {
+.aklOverlay {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -85,5 +135,5 @@ h1.PrivacyHeading
 .aklContainer:hover .overlay {
     opacity: 1;
 }
-
+*/
 
