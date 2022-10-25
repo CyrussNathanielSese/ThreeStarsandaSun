@@ -19,41 +19,43 @@ body {
 
 h1 {
     text-align: center;
-    color: yellow;
+    color: black;
 }
 h2.HomeH2
 {
     color: red;
 }
 
-h1.CityHead
-{
+h1.CityHead {
     text-align: left;
     background: none;
+    color: black;
 }
 
-h1.EventHead 
-{
+h1.EventHead {
     text-align: left;
     background: none;
+    color: black;
 }
 
-h1.RestoHead 
-{
+h1.RestoHead {
     text-align: left;
     background: none;
+    color: black;
 }
 
 h1.StoreHead
 {
     text-align: left;
     background: none;
+    color: black;
 }
 
 h1.PrivacyHeading
 {
     text-align: left;
     background: none;
+    color: black;
 }
 
 .CityPhoto
@@ -94,20 +96,20 @@ h1.PrivacyHeading
 
 @keyframes fader 
 {
-    4% {
+    5% {
         background: url(/img/banauericeterraces.png); 
         background-size:cover;
     }
     25% {
-        background: url(/img/aucklandcityphoto.jpg); 
-        background-size:cover;
+        background: url(/img/banauericeterraces.jpg);
+        background-size: cover;
     }
     55% {
         background: url(/img/banauericeterraces.png); 
         background-size:cover;
     }
-    80% {
-        background: url(/img/aucklandcityphoto.jpg); 
+    75% {
+        background: url(/img/banauericeterraces.jpg);
         background-size: cover;
     }
     100% {
@@ -118,9 +120,7 @@ h1.PrivacyHeading
 }
 
 
-
-
-/*.aklContainer {
+.aklContainer {
     position: relative;
     width: 50%;
 }
@@ -144,5 +144,5 @@ h1.PrivacyHeading
 .aklContainer:hover .overlay {
     opacity: 1;
 }
-*/
+
 
