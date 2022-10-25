@@ -19,11 +19,11 @@ body {
 
 h1 {
     text-align: center;
-    background: yellow;
+    color: yellow;
 }
 h2.HomeH2
 {
-    color: white;
+    color: red;
 }
 
 h1.CityHead
@@ -94,19 +94,28 @@ h1.PrivacyHeading
 
 @keyframes fader 
 {
-    3% {
-        background: url(/img/banauericeterraces.png); background-size:cover;
+    4% {
+        background: url(/img/banauericeterraces.png); 
+        background-size:cover;
     }
-    30% {
-        background: url(/img/aucklandcityphoto.jpg); background-size:cover;
+    25% {
+        background: url(/img/aucklandcityphoto.jpg); 
+        background-size:cover;
     }
-    40% {
-        background: url();
+    55% {
+        background: url(/img/banauericeterraces.png); 
+        background-size:cover;
     }
+    80% {
+        background: url(/img/aucklandcityphoto.jpg); 
+        background-size: cover;
+    }
+    100% {
+        background: url(/img/banauericeterraces.png);
+        background-size: cover;
+    }
+
 }
-
-
-
 
 
 
