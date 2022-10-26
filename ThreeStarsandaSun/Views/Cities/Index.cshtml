@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Index";
 }
-<body id="CityBackground">
+<body class="CityBackground">
     <br />
 <h1 class="CityHead">Cities</h1>
     <br />
@@ -32,6 +32,8 @@
                 <a asp-action="Details" asp-route-id="@item.CityID">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.CityID">Delete</a>
             </td>
+
+
         </tr>
 }
     </tbody>

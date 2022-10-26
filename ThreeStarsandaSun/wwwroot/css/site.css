@@ -32,6 +32,13 @@ h1.CityHead {
     color: black;
 }
 
+h1.display-4 {
+    color: yellow;
+    border-style: solid;
+    border-radius:20px / 30px;
+    border-spacing: inherit;
+}
+
 h1.EventHead {
     text-align: left;
     background: none;
@@ -78,8 +85,12 @@ h1.PrivacyHeading
 
 }
 
+.HomeBackground {
+    background: url(/img/Auckland_Skyline_as_seen_from_Devonport_20100128_3.jpg);
+    background-size: cover;
+}
 
-
+/*
 #HomeBackground {
     background-size: cover;
     background-attachment: fixed;
@@ -118,31 +129,4 @@ h1.PrivacyHeading
     }
 
 }
-
-
-.aklContainer {
-    position: relative;
-    width: 50%;
-}
-.aklimage {
-    display: block;
-    width: 100%;
-    height: auto;
-}
-.aklOverlay {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 100%;
-    width: 100%;
-    opacity: 0;
-    transition: .5s ease;
-    background-color: #008CBA;
-}
-.aklContainer:hover .overlay {
-    opacity: 1;
-}
-
-
+*/
