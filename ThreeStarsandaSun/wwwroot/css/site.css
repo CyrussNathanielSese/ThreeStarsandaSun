@@ -39,16 +39,10 @@ h1.display-4 {
     border-spacing: inherit;
 }
 
-h1.EventHead {
-    text-align: left;
-    background: none;
-    color: black;
-}
-
 h1.RestoHead {
     text-align: left;
     background: none;
-    color: black;
+    color: White;
 }
 
 h1.StoreHead
@@ -56,6 +50,12 @@ h1.StoreHead
     text-align: left;
     background: none;
     color: black;
+}
+
+h1.EventHead {
+    text-align: left;
+    background: none;
+    color: red;
 }
 
 h1.PrivacyHeading
@@ -71,25 +71,39 @@ h1.PrivacyHeading
     background-size: cover;
 }
 
-.RestaurantPhoto
-{
-}
-
-.EventPhoto
-{
-
-}
-
-.StorePhoto
-{
-
-}
 
 .HomeBackground {
     background: url(/img/Auckland_Skyline_as_seen_from_Devonport_20100128_3.jpg);
     background-size: cover;
 }
 
+.CityPhoto{
+    background: url(/img/Auckland_Skyline_as_seen_from_Devonport_20100128_3.jpg);
+    background-size: cover;
+}
+
+.EventPhoto {
+    background: url(/img/eventphoto1.jpg);
+    background-size: cover;
+}
+
+.RestaurantPhoto {
+    background: url(/img/restaurantphoto.jpg);
+    background-size: cover;
+}
+
+.StorePhoto {
+    background: url(/img/Mount_Pico_de_Loro,_Nasugbu,_Philippines.jpg);
+    background-size: cover;
+}
+
+.eventstr {
+    color: deepskyblue;
+}
+
+.restotr {
+    color: white;
+}
 /*
 #HomeBackground {
     background-size: cover;

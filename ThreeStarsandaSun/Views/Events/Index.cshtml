@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Index";
 }
-
+<body class="EventPhoto">
 <h1 class="EventHead">Events</h1>
 
 <p>
@@ -11,7 +11,7 @@
 </p>
 <table class="table">
     <thead>
-        <tr>
+        <tr class=eventstr>
             <th>
                 @Html.DisplayNameFor(model => model.EventName)
             </th>
@@ -51,3 +51,4 @@
 }
     </tbody>
 </table>
+</body>
